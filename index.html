@@ -14,11 +14,35 @@
   <p>Nhập câu tiếng Anh:</p>
   <textarea id="input" rows="4" placeholder="Ví dụ: Weather here is unpredictable."></textarea>
   <button onclick="generate()">Tạo shorthand</button>
-
+  <button onclick="generateAbbreviation()">Tạo shorthand2</button>
   <p>📘 Shorthand notation:</p>
   <pre id="output"></pre>
 
   <script>
+    function generateAbbreviation() {
+      const abbreviationMap = {
+        talented: 'talent',
+        people: 'ppl',
+        special: 'spec',
+        marketing: 'mktg',
+        department: 'dept',
+        university: 'uni',
+        information: 'info',
+        technology: 'tech',
+        development: 'dev',
+        international: 'intl',
+        government: 'gov',
+        business: 'biz',
+        education: 'edu',
+        communication: 'comm',
+        management: 'mgmt'
+      };
+    
+      const text = document.getElementById("input").value.toLowerCase();
+      const words = text.split(/\s+/);
+      const result = words.map(w => abbreviationMap[w] || w);
+      document.getElementById("output").innerText = result.join(' ');
+    }
     function toShorthand(word) {
       word = word.toLowerCase().replace(/[^a-z]/g, '');
       const vowels = ['a', 'e', 'i', 'o', 'u'];
