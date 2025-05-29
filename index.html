@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Shorthand Generator</title>
+  <style>
+    body { font-family: Arial; padding: 20px; max-width: 800px; margin: auto; }
+    textarea, pre { width: 100%; font-size: 16px; margin-top: 10px; }
+    button { margin-top: 10px; padding: 6px 12px; font-size: 16px; }
+  </style>
+</head>
+<body>
+  <h2>✍️ English Shorthand Generator</h2>
+  <p>Nhập câu tiếng Anh:</p>
+  <textarea id="input" rows="4" placeholder="Ví dụ: Weather here is unpredictable."></textarea>
+  <button onclick="generate()">Tạo shorthand</button>
+
+  <p>📘 Shorthand notation:</p>
+  <pre id="output"></pre>
+
+  <script>
+    function toShorthand(word) {
+      word = word.toLowerCase().replace(/[^a-z]/g, '');
+      const vowels = ['a', 'e', 'i', 'o', 'u'];
+      let result = '';
+      for (let i = 0; i < word.length; i++) {
+        if (!vowels.includes(word[i])) result += word[i];
+        if (result.length >= 4) break;
+      }
+      return result || word.slice(0, 3);
+    }
+
+    function generate() {
+      const text = document.getElementById("input").value;
+      const words = text.split(/\s+/);
+      const shorthand = words.map(toShorthand);
+      document.getElementById("output").innerText = shorthand.join(' ');
+    }
+  </script>
+</body>
+</html>
